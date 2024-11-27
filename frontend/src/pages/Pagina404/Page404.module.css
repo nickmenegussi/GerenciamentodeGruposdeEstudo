@@ -1,0 +1,17 @@
+.errorTitle {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 75px;
+    color: rgb(37, 37, 243);
+}
+
+.errorMessage {
+    font-size: 30px;
+    font-weight: bold;
+}
+.errorPage {
+    margin: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}

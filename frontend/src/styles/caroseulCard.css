@@ -1,0 +1,65 @@
+/* Contêiner principal do carrossel */
+.slider-container {
+    width: 100%; /* O carrossel ocupa toda a largura do contêiner */
+    max-width: 1000px; /* Largura máxima */
+    margin: 0 auto; /* Centraliza na página */
+    padding: 15px 0; /* Espaçamento acima e abaixo */
+  }
+  
+  /* Estilo dos itens */
+  .slick-item {
+    padding: 10px; /* Espaçamento interno */
+  }
+  
+  .slick-item .card {
+    width: 100%; /* Largura total do card */
+    max-width: 390px; /* Largura máxima para manter proporção */
+    margin: 0 auto; /* Centraliza os cards dentro dos itens */
+    border-radius: 10px; /* Arredondamento das bordas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+    transition: transform 0.3s ease-in-out; /* Suaviza animação */
+  }
+  
+  .slick-item .card:hover {
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* Aumenta a sombra */
+  }
+  
+  /* Botões de navegação */
+  .slick-prev,
+  .slick-next {
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    border-radius: 50%; /* Formato arredondado */
+    width: 40px; /* Largura dos botões */
+    height: 40px; /* Altura dos botões */
+    z-index: 1; /* Coloca os botões acima dos slides */
+  }
+  
+  .slick-prev:hover,
+  .slick-next:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro ao passar o mouse */
+  }
+  
+  /* Posição dos botões */
+  .slick-prev {
+    left: -50px; /* Ajusta a posição do botão anterior */
+  }
+  
+  .slick-next {
+    right: -50px; /* Ajusta a posição do botão próximo */
+  }
+  
+  /* Estilo dos pontos de navegação */
+  .slick-dots {
+    bottom: -20px; /* Posiciona os pontos abaixo do carrossel */
+  }
+  
+  .slick-dots li button:before {
+    font-size: 12px; /* Tamanho dos pontos */
+    color: rgba(0, 0, 0, 0.5); /* Cor padrão dos pontos */
+  }
+  
+  .slick-dots li.slick-active button:before {
+    color: black; /* Cor dos pontos ativos */
+  }
+  

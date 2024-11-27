@@ -1,0 +1,21 @@
+.container{
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+}
+.content-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 10vh;
+}
+
+.text-description {
+    max-width: 34vw;
+}
+
+.Header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
