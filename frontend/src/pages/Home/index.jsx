@@ -4,9 +4,13 @@ import Header from "../../components/Header";
 import "../../styles/home.css";
 import Imagem from "../../assets/images/1351417.png";
 import Footer from "../../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Home() {
+  const [user, setUser] = useState(null);
+
+  
   return (
     <>
       <Header />
@@ -37,10 +41,7 @@ function Home() {
         <section className="container">
           <div className="Header-container">
             <h1>Grupos disponiveis</h1>
-            <Link className="navbar-brand">
-              Ver mais
-            </Link>
-            
+            <Link className="navbar-brand">Ver mais</Link>
           </div>
           <CaroseulCards />
         </section>
@@ -48,13 +49,14 @@ function Home() {
         <section className="container">
           <div className="Header-container">
             <h1>Reflexões</h1>
-            <Link  className="navbar-brand" to={"/reflexoes"}>
-                Ver mais
+            <Link className="navbar-brand" to={"/reflexoes"}>
+              Ver mais
             </Link>
           </div>
           <CardReflexao />
         </section>
       </main>
+
       <Footer />
     </>
   );

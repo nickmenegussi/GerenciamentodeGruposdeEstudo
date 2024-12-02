@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css"; // Importando o Bootstrap
 import foto from "../assets/images/1351417.png"
 import "../pages/Reflexoes/index.css"
 
-function CardReflexao(){
+function CardReflexao({title, description, author, whoAdd}){
     return (
         <div className="row row-cols-1 row-cols-md-3 g-4 mt-2 m-0">
           <div className="col" >

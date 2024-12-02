@@ -6,6 +6,8 @@ import EstudoEsde from "./pages/Estudos/Estudo mediunico";
 import Esde from "./pages/Estudos/Esde";
 import Ciede from "./pages/Estudos/Ciede";
 import PaginaErro from "./pages/Pagina404";
+import CadastroUsuario from "./pages/Cadastro";
+import Login from "./pages/Login";
 
 function AppRoutes(){
     return (
@@ -17,6 +19,9 @@ function AppRoutes(){
           <Route path="/estudo/mediunidade" element={<EstudoEsde />} />
           <Route path="/estudo/iniciante" element={<Ciede />} />
           <Route path="/estudo/intermediario&avancado" element={<Esde />} />
+          <Route path="/cadastro" element={<CadastroUsuario />} />
+          <Route path="/login" element={<Login />} />
+
           <Route path="*" element={<PaginaErro />} />
         </Routes>
       </Router>

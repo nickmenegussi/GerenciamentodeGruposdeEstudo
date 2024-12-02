@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const dotenv = require('dotenv')
 const port = 3001;
 const estudosRoutes = require("./routes/estudosRoutes");
 const usuarioRoutes = require("./routes/usuarioRoutes");
@@ -8,6 +9,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+dotenv.config()
 app.use("/estudos", estudosRoutes);
 app.use("/usuario", usuarioRoutes);
 

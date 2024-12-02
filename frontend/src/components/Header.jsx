@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Link } from "react-router-dom";
 import "../styles/App.css"
+import { CircleUserRound } from "lucide-react";
 
 function Header() {
   return (
@@ -75,7 +76,6 @@ function Header() {
                     <Link className="dropdown-item" to={""}>
                       Grupos Disponíveis
                     </Link>
-                    
                   </li>
                 </ul>
               </li>
@@ -89,6 +89,11 @@ function Header() {
                   Sobre
                 </a>
               </li>
+              <li className="nav-item">
+                  <Link className="nav-link active" aria-current="page" to={"/cadastro"}>
+                    <CircleUserRound />
+                  </Link>
+                </li>
             </ul>
           </div>
         </div>
