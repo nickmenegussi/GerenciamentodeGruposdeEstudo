@@ -2,10 +2,21 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick"
 import CardExibir from "./CardEstudo"
-import Carregando from "./Carregando"
 import "../styles/caroseulCard.css"
+import { useState } from "react"
 
 function CaroseulCards() {
+  const contentCard = [{
+     id: 1,
+     title: 'Grupo de mediunidade',
+     cardText: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, perspiciatis! Cupiditate id expedita incidunt repudiandae voluptatibus modi? Beatae, commodi officia maiores sapiente corporis quo voluptates blanditiis magnam veniam praesentium dolorem.',
+     img: 'Testando'
+  },{
+    id: 2,
+     title: 'Grupo Ciede',
+     cardText: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, perspiciatis! Cupiditate id expedita incidunt repudiandae voluptatibus modi? Beatae, commodi officia maiores sapiente corporis quo voluptates blanditiis magnam veniam praesentium dolorem.',
+     img: 'Testando'
+  }]
   const settings = {
     infinite: true,
     centerMode: true,
@@ -21,25 +32,16 @@ function CaroseulCards() {
       },
     ],
   }
-
   return (
+    
     <div className="slider-container mt-3">
       <Slider {...settings}>
-        <div className="slick-item">
-          <CardExibir />
+      {contentCard.map((card) => (
+        <div className="slick-item" key={card.id}>
+          <CardExibir title={card.title} cardText={card.cardText} />
         </div>
-        <div className="slick-item">
-          <CardExibir />
-        </div>
-        <div className="slick-item">
-          <CardExibir />
-        </div>
-        <div className="slick-item">
-          <CardExibir />
-        </div>
-        <div className="slick-item">
-          <Carregando />
-        </div>
+      ))}
+        
       </Slider>
     </div>
   )

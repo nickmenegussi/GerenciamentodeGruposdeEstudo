@@ -1,38 +1,36 @@
-import "bootstrap/dist/css/bootstrap.min.css" // Importando o Bootstrap
-import styles from "../Login/PageLogin.module.css"
-import { Link, useNavigate } from "react-router-dom"
-import { useRef, useState } from "react"
-import api from "../../services/api"
+import "bootstrap/dist/css/bootstrap.min.css"; // Importando o Bootstrap
+import styles from "../Login/PageLogin.module.css";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
+import { AuthContext } from "../../contexts/auth";
 
 function Login() {
+  const { login, user } = useContext(AuthContext);
+
+  if(user){
+    return <Navigate to={"/home"} />
+  }
+
   // hook para pegar valores do input
-  const inputEmail = useRef()
-  const inputSenha = useRef()
-  const navigate = useNavigate()
+  const inputEmail = useRef();
+  const inputSenha = useRef();
 
   async function Entrar() {
     try {
-      const response = await api.post("/usuario/criarLogin", {
-        email: inputEmail.current.value,
-        senha: inputSenha.current.value,
-      })
-      
-      inputEmail.current.value = ""
-      inputSenha.current.value = ""
+      const email = inputEmail.current.value;
+      const senha = inputSenha.current.value;
 
-      alert(response.data.message)
-      console.log(response.data)
-      const loginData = {
-        autenticacao: true,
-        token: response.data.data,
-      }
-      localStorage.setItem("login", JSON.stringify(loginData))
-      navigate("/")
+      await login(email, senha);
+
+      inputEmail.current.value = "";
+      inputSenha.current.value = "";
+
+      alert("Login realizado com sucesso");
     } catch (error) {
-      console.error("Erro:", error)
+      console.error("Erro:", error);
 
       if (error.response) {
-        alert(`Erro: ${error.response.data.message}`)
+        alert(`Erro: ${error.response.data.message}`);
       }
     }
   }
@@ -95,6 +93,12 @@ function Login() {
                       Clique aqui
                     </Link>
                   </p>
+                  <p>
+                    Não tem uma conta? <span>Cadastre-se </span>
+                    <Link className={styles.linklogin} to={"/cadastro"}>
+                      Clique aqui
+                    </Link>
+                  </p>
                 </div>
               </form>
             </div>
@@ -102,7 +106,7 @@ function Login() {
         </section>
       </main>
     </>
-  )
+  );
 }
 
-export default Login
+export default Login;

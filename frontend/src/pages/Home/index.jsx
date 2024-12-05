@@ -9,7 +9,19 @@ import { useEffect, useState } from "react";
 
 function Home() {
   const [user, setUser] = useState(null);
+  const contentReflexao = [{
+    id:1,
+    title: 'Titulo',
+    description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error non nulla modi doloremque distinctio. Dignissimos, delectus accusamus? Ut minima maiores odio, quaerat voluptates vitae nihil nobis ipsa laudantium omnis natus.',
+    whoAdd: 'Adicionado por josé'
+  },{
+    id:2,
+    title: 'Titulo',
+    description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error non nulla modi doloremque distinctio. Dignissimos, delectus accusamus? Ut minima maiores odio, quaerat voluptates vitae nihil nobis ipsa laudantium omnis natus.',
+    whoAdd: 'Adicionado por carlos'
+  }
 
+]
   
   return (
     <>
@@ -53,7 +65,14 @@ function Home() {
               Ver mais
             </Link>
           </div>
-          <CardReflexao />
+          <div className="row row-cols-1 row-cols-md-3 g-4 mt-2 m-0">
+          {contentReflexao.map((content) => (
+            <div key={content.id} className="col">
+                <CardReflexao title={content.title} description={content.description} whoAdd={content.whoAdd} />
+            </div>
+          ))}
+          </div>
+          
         </section>
       </main>
 

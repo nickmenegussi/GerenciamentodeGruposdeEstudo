@@ -2,8 +2,8 @@
 const jwt = require('jsonwebtoken')
 
 const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization
-
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1]; // Bearer <token> 
+    
     if(!token){
         return res.status(401).json({
             success: false,
@@ -13,12 +13,13 @@ const authMiddleware = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET) // Decodifica o token
-        req.data = decoded
-        next()
+        req.data = decoded // é responsavel pelos dados que estão atraves do token que configuramos na rota de autenticacao
+        next() // prosseguir
     } catch(err){
         return res.status(401).json({
             success: false,
-            message: 'Token inválido ou expirado.',
+            message: 'Token inválido ou expirado.'
+            
         })
     }
 }

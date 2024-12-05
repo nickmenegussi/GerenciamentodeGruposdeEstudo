@@ -1,0 +1,49 @@
+.card {
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 350px;
+    height: 250px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    background-color: #ffffff; /* Cor de fundo dos cards */
+}
+
+.cardtitle {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.cardtext {
+    font-size: 0.95rem;
+    text-align: justify;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+.card:hover {
+    background: linear-gradient(to left, #2177f8, #72a1e7 );
+    color: white;
+}
+.Reflexoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 15px;
+    padding-top: 20px;
+    padding-left: 60px;
+    padding-bottom: 30px;
+}
+
+.linha {
+    border: 1px solid;
+}
+
+.cardFooter {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    margin-top: 15px;
+}

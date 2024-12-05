@@ -1,10 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css"; // Importando o Bootstrap
 import styles from "../Cadastro/PageCadastro.module.css";
-import { Link } from "react-router-dom";
-import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useRef } from "react";
 import api from "../../services/api";
 
+
 function CadastroUsuario() {
+  const navigate = useNavigate()
+
   // hook para pegar os valores dos inputs
   const inputName = useRef()
   const inputEmail = useRef()
@@ -16,16 +19,18 @@ function CadastroUsuario() {
       const response = await api.post('/usuario/criarCadastro', {
         nome: inputName.current.value,
         email: inputEmail.current.value,
-        senha: inputSenha.current.value
+        senha: inputSenha.current.value,
+        status_permissao: 'USER'
       })
-      alert(response.data.message)
-      inputSenha.current.value = ''
-      inputEmail.current.value = ''
-      inputName.current.value = ''
+      alert(response.data.message)      
+      navigate('/')
     } catch (error){
       console.error('Erro ao criar um novo usuárop', error)
       if(error.response){
         alert(`Erro: ${error.response.data.message}`)
+        inputSenha.current.value = ''
+        inputEmail.current.value = ''
+        inputName.current.value = ''
       }
     }
   }
@@ -97,7 +102,7 @@ function CadastroUsuario() {
                 </button>
                 <div className="mt-3 text-center">
                   <p>
-                    Já tem uma conta? <Link className={styles.linklogin} to={'/login'}>Clique aqui</Link>
+                    Já tem uma conta? <Link className={styles.linklogin} to={'/'}>Clique aqui</Link>
                   </p>
                 </div>
               </form>

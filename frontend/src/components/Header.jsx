@@ -2,9 +2,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Link } from "react-router-dom";
 import "../styles/App.css"
-import { CircleUserRound } from "lucide-react";
+import { CircleUserRound, User } from "lucide-react";
+import { useState } from "react";
 
 function Header() {
+  const dataStorage = JSON.parse(localStorage.getItem('@Auth:user'))
   return (
     <header>
       <nav className="navbar navbar-expand-lg">
@@ -29,12 +31,13 @@ function Header() {
                 <Link
                   className="nav-link active"
                   aria-current="page"
-                  to="/"
+                  to="/home"
                 >
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
+              { dataStorage?.status_permissao === 'ADMIN' ? (
+                <li className="nav-item">
                 <Link
                   className="nav-link active"
                   aria-current="page"
@@ -43,6 +46,7 @@ function Header() {
                   Adicionar Grupo
                 </Link>
               </li>
+              ) : (null)}
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
@@ -90,7 +94,7 @@ function Header() {
                 </a>
               </li>
               <li className="nav-item">
-                  <Link className="nav-link active" aria-current="page" to={"/cadastro"}>
+                  <Link className="nav-link active" aria-current="page" to={"/profile"}>
                     <CircleUserRound />
                   </Link>
                 </li>

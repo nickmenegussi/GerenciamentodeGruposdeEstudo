@@ -37,7 +37,7 @@ exports.visualizarEstudo = (req, res) => {
   })
 }
 
-exports.criarEstudo = [
+exports.criarEstudo = (req, res) => {
   upload.single("imagem"),
   (req, res) => {
     const imagem = req.file ? req.file.filename : null
@@ -72,7 +72,7 @@ exports.criarEstudo = [
       }
     )
   }
-]
+}
 
 exports.alterarEstudo = (req, res) => {
   const id_estudo = req.params.id
