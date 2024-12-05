@@ -25,4 +25,4 @@ dist-ssr
 *.sw?
 
 # Arquivos de ambiente
-.env
+*.env
