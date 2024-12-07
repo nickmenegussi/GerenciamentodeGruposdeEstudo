@@ -34,7 +34,7 @@ function Adicionargrupo() {
       formData.append("imagem", imagem)
       formData.append("categoria", categoria)
       formData.append("UsuarioId", UsuarioId)
-     
+      console.log(formData)
       const response = await api.post(
         "http://localhost:3001/estudos/criar",
         formData,
@@ -97,7 +97,6 @@ function Adicionargrupo() {
                 <input type="file" className="form-control imagem" name="imagem"  ref={InputImage}  />
               </div>
               <button
-                onClick={cadsatrarGrupo}
                 type="submit"
                 className="btn btn-primary w-100"
               >

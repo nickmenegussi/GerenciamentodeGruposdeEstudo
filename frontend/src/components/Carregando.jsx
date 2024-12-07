@@ -1,6 +1,7 @@
+
 function Carregando() {
   return (
-    <div className="card" aria-hidden="true" >
+    <div className="card " aria-hidden="true" >
       <img src="https://via.placeholder.com/" className="card-img-top" alt="..." />
       <div className="card-body">
         <h5 className="card-title placeholder-glow">

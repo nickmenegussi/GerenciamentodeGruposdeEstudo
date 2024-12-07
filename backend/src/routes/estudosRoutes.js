@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware')
 const upload = require("../config/multer/multerConfig")
 // Rota para criar um novo estudo
 
-router.get('/visualizar', authMiddleware ,visualizarEstudo)
+router.get('/visualizar/:id', authMiddleware ,visualizarEstudo)
 
 router.post('/criar', authMiddleware, upload.single('imagem') ,criarEstudo)
 

@@ -1,20 +1,25 @@
-const multer = require("multer")
+const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 
+// Caminho absoluto para o diretório `uploads`
+const uploadPath = path.resolve(__dirname, "../../../uploads");
+
+// Certifique-se de que a pasta existe
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
+}
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '../front/uploads/') // Define a pasta onde as imagens serão salvas
-    },
-    filename: (request, file, cb) => {
-        const fileName = request.body.nomeArquivo ? request.body.nomeArquivo : file.originalname
+  destination: (req, file, cb) => {
+    cb(null, uploadPath); // Define o caminho correto para o diretório `uploads`
+  },
+  filename: (req, file, cb) => {
+    const fileName = req.body.nomeArquivo || file.originalname;
+    cb(null, fileName + path.extname(file.originalname)); // Define o nome do arquivo salvo
+  },
+});
 
-        cb(null, fileName + path.extname(file.originalname)) // Define o nome do arquivo salvo
-    }
-})
+const upload = multer({ storage });
 
-  const upload = multer({
-    storage: storage,
-})
-
-module.exports = upload
+module.exports = upload;

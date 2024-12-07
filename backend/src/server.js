@@ -13,6 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 dotenv.config()
+app.use(express.urlencoded({ extended: true }));
 app.use("/estudos", authMiddleware ,estudosRoutes);
 app.use("/usuario", usuarioRoutes);
 app.use("/admin", authMiddleware ,admin)

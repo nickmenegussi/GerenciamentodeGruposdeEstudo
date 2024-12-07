@@ -3,45 +3,51 @@ import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick"
 import CardExibir from "./CardEstudo"
 import "../styles/caroseulCard.css"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import api from "../services/api"
+import Carregando from "../components/Carregando"
 
 function CaroseulCards() {
-  const contentCard = [{
-     id: 1,
-     title: 'Grupo de mediunidade',
-     cardText: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, perspiciatis! Cupiditate id expedita incidunt repudiandae voluptatibus modi? Beatae, commodi officia maiores sapiente corporis quo voluptates blanditiis magnam veniam praesentium dolorem.',
-     img: 'Testando'
-  },{
-    id: 2,
-     title: 'Grupo Ciede',
-     cardText: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, perspiciatis! Cupiditate id expedita incidunt repudiandae voluptatibus modi? Beatae, commodi officia maiores sapiente corporis quo voluptates blanditiis magnam veniam praesentium dolorem.',
-     img: 'Testando'
-  }]
+  const [ContentCard, setContentCard] = useState([])
+  const DadosJson = JSON.parse(localStorage.getItem('@Auth:user'))
+
+  useEffect(() => {
+    const axiosContent = async () => {
+      const response = await api.get(`http://localhost:3001/estudos/visualizar/${DadosJson.id_user}`)
+      setContentCard(response.data.body)
+    }
+    axiosContent()
+  }, [])
+
+
   const settings = {
-    infinite: true,
+    infinite: ContentCard.length > 0,
     centerMode: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 3,  // Define o número de slides dinamicamente
     slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1,  // Ajuste para telas pequenas
         },
       },
     ],
   }
+
   return (
-    
     <div className="slider-container mt-3">
       <Slider {...settings}>
-      {contentCard.map((card) => (
-        <div className="slick-item" key={card.id}>
-          <CardExibir title={card.title} cardText={card.cardText} />
-        </div>
-      ))}
-        
+        {ContentCard.length > 0 ? (
+          ContentCard.map((content) => (
+            <div key={content.id_estudo} className="slick-item">
+              <CardExibir title={content.categoria} cardText={content.descricao} img={content.img} />
+            </div>
+          ))
+        ) : (
+          <Carregando />
+        )}
       </Slider>
     </div>
   )

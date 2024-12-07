@@ -1,8 +1,9 @@
 const connection = require("../config/db")
 
 exports.visualizarEstudo = (req, res) => {
-  const query = "SELECT * FROM Estudo"
-  connection.query(query, (err, result) => {
+  const UsuarioId = req.params.id
+  const query = "SELECT * FROM Estudo where UsuarioId = ?"
+  connection.query(query, [UsuarioId] ,(err, result) => {
     if (err) {
       return res.status(500).json({
         message: "Erro ao se conectar com o servidor.",
