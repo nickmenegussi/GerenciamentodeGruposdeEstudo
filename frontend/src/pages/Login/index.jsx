@@ -7,10 +7,6 @@ import { AuthContext } from "../../contexts/auth";
 function Login() {
   const { login, user } = useContext(AuthContext);
 
-  if(user){
-    return <Navigate to={"/home"} />
-  }
-
   // hook para pegar valores do input
   const inputEmail = useRef();
   const inputSenha = useRef();
@@ -26,6 +22,7 @@ function Login() {
       inputSenha.current.value = "";
 
       alert("Login realizado com sucesso");
+      
     } catch (error) {
       console.error("Erro:", error);
 
@@ -35,6 +32,10 @@ function Login() {
     }
   }
 
+  if(user){
+    return <Navigate to="/home" />
+  }
+  
   return (
     <>
       <main className={styles.contentMain}>

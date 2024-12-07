@@ -1,22 +1,4 @@
 const connection = require("../config/db")
-const multer = require("multer")
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "../front/uploads/") // Define a pasta onde as imagens serão salvas
-  },
-  filename: (request, file, cb) => {
-    const fileName = request.body.nomeArquivo
-      ? request.body.nomeArquivo
-      : file.originalname
-
-    cb(null, fileName + path.extname(file.originalname)) // Define o nome do arquivo salvo
-  },
-})
-
-const upload = multer({
-  storage: storage,
-})
 
 exports.visualizarEstudo = (req, res) => {
   const query = "SELECT * FROM Estudo"
@@ -38,40 +20,39 @@ exports.visualizarEstudo = (req, res) => {
 }
 
 exports.criarEstudo = (req, res) => {
-  upload.single("imagem"),
-  (req, res) => {
-    const imagem = req.file ? req.file.filename : null
-    const { nome, descricao, categoria, UsuarioId } = req.body
+  const imagem = req.file ? req.file.filename : null
+  const { nome, descricao, categoria, UsuarioId } = req.body
 
-    if (!nome || !descricao || !categoria || !UsuarioId) {
-      return res.status(400).json({
-        message: "Preencha todos os campos.",
-        success: false,
-      })
-    }
+  console.log(nome, descricao, categoria, UsuarioId, imagem)
 
-    const params = Array(nome, descricao, imagem, categoria, UsuarioId)
-
-    connection.query(
-      "INSERT INTO Estudo(nome, descricao, imagem, categoria, UsuarioId) VALUES (?, ?, ?, ?, ?)",
-      params,
-      (err, result) => {
-        if (err) {
-          return res.status(500).json({
-            message: "Erro ao se conectar com o servidor.",
-            success: false,
-            body: err,
-          })
-        } else {
-          return res.status(200).json({
-            message: "Sucesso ao criar um novo grupo.",
-            success: true,
-            body: result,
-          })
-        }
-      }
-    )
+  if (!nome || !descricao || !categoria || !UsuarioId) {
+    return res.status(400).json({
+      message: "Preencha todos os campos.",
+      success: false,
+    })
   }
+
+  const params = [nome, descricao, imagem, categoria, UsuarioId]
+
+  connection.query(
+    "INSERT INTO Estudo(nome, descricao, imagem, categoria, UsuarioId) VALUES (?, ?, ?, ?, ?)",
+    params,
+    (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          message: "Erro ao se conectar com o servidor.",
+          success: false,
+          data: err,
+        })
+      } else {
+        return res.status(200).json({
+          message: "Sucesso ao criar um novo grupo.",
+          success: true,
+          data: result,
+        })
+      }
+    }
+  )
 }
 
 exports.alterarEstudo = (req, res) => {
@@ -106,7 +87,7 @@ exports.alterarEstudo = (req, res) => {
       const { nome, descricao, categoria } = req.body
 
       connection.query(
-        "Update Estudo set nome = ?, set descricao = ? and categoria = ? where id_estudo = ?",
+        "Update Estudo set nome = ?, descricao = ?, categoria = ? where id_estudo = ?",
         [nome, descricao, categoria, id_estudo],
         (err, result) => {
           if (err) {
@@ -156,7 +137,7 @@ exports.deletarEstudo = (req, res) => {
       }
 
       // Consulta para deletar o estudo
-      const deleteQuery = "DELETE FROM Estudo WHERE id_estudo = ?"
+      const deleteQuery = "DELETE * FROM Estudo WHERE id_estudo = ?"
       connection.query(deleteQuery, [id_estudo], (err, result) => {
         if (err) {
           return res.status(500).json({
