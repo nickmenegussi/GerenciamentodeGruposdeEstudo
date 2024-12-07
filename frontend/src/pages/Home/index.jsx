@@ -5,8 +5,10 @@ import "../../styles/home.css";
 import Imagem from "../../assets/images/1351417.png";
 import Footer from "../../components/Footer";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Home() {
+  const [user, setUser] = useState(null);
   const contentReflexao = [{
     id:1,
     title: 'Titulo',

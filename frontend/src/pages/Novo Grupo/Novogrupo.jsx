@@ -34,7 +34,7 @@ function Adicionargrupo() {
       formData.append("imagem", imagem)
       formData.append("categoria", categoria)
       formData.append("UsuarioId", UsuarioId)
-      console.log(formData)
+     
       const response = await api.post(
         "http://localhost:3001/estudos/criar",
         formData,
