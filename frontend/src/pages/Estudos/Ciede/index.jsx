@@ -1,4 +1,4 @@
-import CaroseulCards from "../../../components/CaroseulCard";
+import CarrosselGruposDisponiveis from "../../../components/CaroseulGruposDisponiveis";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import styles from "../Ciede/Ciede.module.css";
@@ -73,7 +73,7 @@ function Ciede() {
         </section>
         <section>
             <h1 className="text-center mt-5">Cursos Disponíveis do ESDE</h1>
-            <CaroseulCards />
+            <CarrosselGruposDisponiveis />
         </section>
       </main>
       <Footer />

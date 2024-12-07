@@ -5,15 +5,11 @@ import api from "../../services/api"
 
 function Adicionargrupo() {
   const token = localStorage.getItem("@Auth:token")
-  const dados = JSON.parse(localStorage.getItem('@Auth:user'))
 
   const InputName = useRef()
   const InputDescription = useRef()
   const InputImage = useRef()
   const InputCategoria = useRef()
-
-  console.log(InputImage)
-
 
   async function cadsatrarGrupo(event)  {
     event.preventDefault()
@@ -24,16 +20,12 @@ function Adicionargrupo() {
       const descricao = InputDescription.current.value
       const imagem = InputImage.current.files[0]
       const categoria = InputCategoria.current.value
-      const UsuarioId = dados.id_user
-          
-      console.log(imagem)
 
       const formData = new FormData()
       formData.append("nome", nome)
       formData.append("descricao", descricao)
       formData.append("imagem", imagem)
       formData.append("categoria", categoria)
-      formData.append("UsuarioId", UsuarioId)
      
       const response = await api.post(
         "http://localhost:3001/estudos/criar",
@@ -52,7 +44,7 @@ function Adicionargrupo() {
       console.log(`Erro: `, error)
 
       if (error.response) {
-        alert(`Erro: Erro ao se conectar com o servidor`);
+        alert(error.response.data.menssage);
       }
     }
   }

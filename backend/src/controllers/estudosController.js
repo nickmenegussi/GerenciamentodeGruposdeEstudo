@@ -1,9 +1,8 @@
 const connection = require("../config/db")
 
 exports.visualizarEstudo = (req, res) => {
-  const UsuarioId = req.params.id
-  const query = "SELECT * FROM Estudo where UsuarioId = ?"
-  connection.query(query, [UsuarioId] ,(err, result) => {
+  const query = "SELECT * FROM Estudo"
+  connection.query(query, (err, result) => {
     if (err) {
       return res.status(500).json({
         message: "Erro ao se conectar com o servidor.",
@@ -20,11 +19,39 @@ exports.visualizarEstudo = (req, res) => {
   })
 }
 
+exports.visualizarEstudoPorUser = (req, res) => {
+  const UsuarioId = req.params.id
+  const query = "SELECT * FROM Estudo where UsuarioId = ?"
+  connection.query(query, [UsuarioId] ,(err, result) => {
+    if (err) {
+      return res.status(500).json({
+        message: "Erro ao se conectar com o servidor.",
+        success: false,
+        body: err,
+      })
+      
+    } 
+    
+    if(result.length === 0){
+      return res.status(400).json({
+        message: `O usuario ${UsuarioId} digitado não existe no nosso sistema.`,
+        success: false,
+        data: err,
+      })
+    }
+    else {
+      return res.status(200).json({
+        message: "Sucesso ao exibir os grupo de estudo.",
+        success: true,
+        body: result,
+      })
+    }
+  })
+}
+
 exports.criarEstudo = (req, res) => {
   const imagem = req.file ? req.file.filename : null
   const { nome, descricao, categoria, UsuarioId } = req.body
-
-  console.log(nome, descricao, categoria, UsuarioId, imagem)
 
   if (!nome || !descricao || !categoria || !UsuarioId) {
     return res.status(400).json({
@@ -35,25 +62,44 @@ exports.criarEstudo = (req, res) => {
 
   const params = [nome, descricao, imagem, categoria, UsuarioId]
 
-  connection.query(
-    "INSERT INTO Estudo(nome, descricao, imagem, categoria, UsuarioId) VALUES (?, ?, ?, ?, ?)",
-    params,
-    (err, result) => {
-      if (err) {
-        return res.status(500).json({
-          message: "Erro ao se conectar com o servidor.",
+  connection.query('SELECT id_user FROM Usuario where id_user = ?', [UsuarioId] ,(err,result) => {
+    if(err){
+      return res.status(500).json({
+        message: "Erro ao se conectar com o servidor.",
+        success: false,
+        data: err,
+      })
+    }
+
+    if(result.length === 0){
+        return res.status(400).json({
+          message: `O usuario ${UsuarioId} digitado não existe no nosso sistema.`,
           success: false,
           data: err,
         })
-      } else {
-        return res.status(200).json({
-          message: "Sucesso ao criar um novo grupo.",
-          success: true,
-          data: result,
-        })
-      }
+    } else {
+      connection.query(
+        "INSERT INTO Estudo(nome, descricao, imagem, categoria, UsuarioId) VALUES (?, ?, ?, ?, ?)",
+        params,
+        (err, result) => {
+          if (err) {
+            return res.status(500).json({
+              message: "Erro ao se conectar com o servidor.",
+              success: false,
+              data: err,
+            })
+          } else {
+            return res.status(200).json({
+              message: "Sucesso ao criar um novo grupo.",
+              success: true,
+              data: result,
+            })
+          }
+        }
+      )
     }
-  )
+
+  })
 }
 
 exports.alterarEstudo = (req, res) => {

@@ -1,7 +1,6 @@
 import Header from "../../../components/Header";
 import "bootstrap/dist/css/bootstrap.min.css"; // Importando o Bootstrap
 import "./index.css";
-import CaroseulCards from "../../../components/CaroseulCard";
 import Footer from "../../../components/Footer";
 
 function EstudoEsde() {
@@ -191,7 +190,6 @@ function EstudoEsde() {
 
         <section className="container mb-5">
           <h1>Grupo de Estudo sobre Mediunidade</h1>
-          <CaroseulCards />
         </section>
       </main>
       <Footer />

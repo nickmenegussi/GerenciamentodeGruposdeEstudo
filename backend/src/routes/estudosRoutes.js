@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const {visualizarEstudo, criarEstudo, alterarEstudo, deletarEstudo} = require('../controllers/estudosController')
+const {visualizarEstudo,visualizarEstudoPorUser, criarEstudo, alterarEstudo, deletarEstudo} = require('../controllers/estudosController')
 const authMiddleware = require('../middleware/authMiddleware')
 const upload = require("../config/multer/multerConfig")
 // Rota para criar um novo estudo
 
-router.get('/visualizar/:id', authMiddleware ,visualizarEstudo)
+router.get('/visualizar', authMiddleware, visualizarEstudo)
+router.get('/visualizar/:id', authMiddleware ,visualizarEstudoPorUser)
 
 router.post('/criar', authMiddleware, upload.single('imagem') ,criarEstudo)
 
