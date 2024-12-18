@@ -1,21 +1,20 @@
 const express = require("express")
 const router = express.Router()
 const {
-  visualizarLogin,
+  dados,
+  visualizar,
   criarCadastro,
-  criarLogin,
   alterarLogin,
   deletarLogin,
 } = require("../controllers/usuarioController")
+const {autenticacao}= require('../controllers/AuthController')
+const authMiddleware = require('../middleware/authMiddleware')
 
-router.get("/visualizar", visualizarLogin)
-
+router.get('/dados', authMiddleware ,dados)
+router.get("/visualizar", authMiddleware ,visualizar)
 router.post("/criarCadastro", criarCadastro)
-
-router.post("/criarLogin", criarLogin)
-
-// router.put('/alterar:id', alterarLogin)
-
-// router.delete('/deletar/:id', deletarLogin)
+router.post("/autenticacao", autenticacao)
+router.put('/alterar/:id', authMiddleware,alterarLogin)
+router.delete('/deletar/:id', authMiddleware, deletarLogin)
 
 module.exports = router

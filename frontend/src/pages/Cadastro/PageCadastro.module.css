@@ -1,0 +1,43 @@
+.contentMain {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background-color: black;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 400px;
+    color: white;
+}
+
+.linklogin {
+    list-style-type: none;
+    text-decoration: none;
+    color: cornflowerblue;
+}
+
+.linklogin:hover{
+    text-decoration: underline;
+}
+.formcontrol {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    border-radius: 8px;
+    padding: 8px;
+    border: none;
+    padding-left: 10px;
+}
+
+
+/* Usando seletores mais específicos para garantir que o estilo seja aplicado */
+.formcontrol:focus, 
+.formcontrol:focus, 
+.formcontrol:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
